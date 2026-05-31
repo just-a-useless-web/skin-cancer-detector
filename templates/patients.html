@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Patients — SkinAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="/dashboard">🔬 SkinAI</a>
+    <a href="/dashboard" class="btn btn-secondary btn-sm">← Retour</a>
+</nav>
+
+<div class="patients-wrap animate">
+    <h1 class="page-title mb-1">📋 Historique patients</h1>
+    <p class="page-sub">{{ patients|length }} diagnostic(s) enregistré(s)</p>
+
+    {% if patients %}
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Âge</th>
+                    <th>Diagnostic</th>
+                    <th>Probabilité</th>
+                    <th>Image</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for p in patients %}
+                <tr>
+                    <td><strong>{{ p.name }}</strong></td>
+                    <td>{{ p.age }} ans</td>
+                    <td>
+                        <span class="{% if p.result == 'Malignant' %}badge-malignant{% else %}badge-benign{% endif %}">
+                            {% if p.result == 'Malignant' %}⚠️{% else %}✅{% endif %} {{ p.result }}
+                        </span>
+                    </td>
+                    <td>{{ (p.probability * 100) | round(2) }}%</td>
+                    <td><img src="{{ p.image_path }}" width="60" height="60" class="patient-img"></td>
+                    <td style="color:var(--muted);font-size:0.82rem;">{{ p.created_at }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-info">Aucun patient enregistré pour le moment.</div>
+    {% endif %}
+</div>
+
+</body>
+</html>
