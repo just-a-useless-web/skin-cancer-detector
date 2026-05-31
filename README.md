@@ -20,35 +20,35 @@
 ### 🔐 1. Connexion
 Accéder à l'application avec les identifiants sécurisés.
 
-![Login](screenshots/Screenshot_2026-05-31_150427.png)
+![Login](screenshots/Screenshot%202026-05-31%20150427.png)
 
 ---
 
 ### 📊 2. Tableau de bord
 Trois actions disponibles : Nouvelle analyse, Historique patients, Déconnexion.
 
-![Dashboard](screenshots/Screenshot_2026-05-31_150552.png)
+![Dashboard](screenshots/Screenshot%202026-05-31%20150552.png)
 
 ---
 
 ### 🩺 3. Soumettre une analyse
 Renseigner le nom du patient, l'âge, et uploader une image de la lésion cutanée.
 
-![Predict](screenshots/Screenshot_2026-05-31_150646.png)
+![Predict](screenshots/Screenshot%202026-05-31%20150646.png)
 
 ---
 
 ### ✅ 4. Résultat du diagnostic IA
-Le modèle VGG16 analyse l'image et retourne un diagnostic **Malignant** ou **Benign** avec un taux de confiance et une barre de progression.
+Le modèle VGG16 analyse l'image et retourne un diagnostic **Malignant** ou **Benign** avec un taux de confiance.
 
-![Result](screenshots/Screenshot_2026-05-31_150848.png)
+![Result](screenshots/Screenshot%202026-05-31%20150848.png)
 
 ---
 
 ### 📋 5. Historique patients
 Consulter tous les diagnostics enregistrés avec les images, résultats et dates.
 
-![Patients](screenshots/Screenshot_2026-05-31_151002.png)
+![Patients](screenshots/Screenshot%202026-05-31%20151002.png)
 
 ---
 
