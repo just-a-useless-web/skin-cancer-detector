@@ -9,119 +9,50 @@
 
 **Application Web Flask intégrant un modèle Deep Learning (VGG16) pour la détection de lésions cutanées malignes ou bénignes.**
 
+*Module : Introduction à l'IA — TD8 | ENSTAB 2025/2026 | Enseignante : Amira Echtioui*
+
 </div>
 
 ---
 
-## 📌 Description
+## 🖥️ Aperçu de l'application
 
-**SkinAI** est une application Web complète développée en Python (Flask) dans le cadre du module **Introduction à l'IA** — TD8, ENSTAB 2025/2026.
+### 🔐 1. Connexion
+Accéder à l'application avec les identifiants sécurisés.
 
-Elle permet aux professionnels de santé de :
-- 🔐 Se connecter de manière sécurisée
-- 🖼️ Soumettre l'image d'une lésion cutanée
-- 🤖 Obtenir une prédiction IA (**Malignant** ou **Benign**) avec taux de confiance
-- 📋 Consulter l'historique complet des diagnostics enregistrés
+![Login](screenshots/Screenshot_2026-05-31_150427.png)
 
 ---
 
-## 🖥️ Démonstration
+### 📊 2. Tableau de bord
+Trois actions disponibles : Nouvelle analyse, Historique patients, Déconnexion.
 
-### 🔐 Page de connexion
-![Login](screenshots/login.png)
-
-### 📊 Tableau de bord
-![Dashboard](screenshots/dashboard.png)
-
-### 🩺 Analyse patient
-![Predict](screenshots/predict.png)
-
-### ✅ Résultat du diagnostic
-![Result](screenshots/result.png)
-
-### 📋 Historique patients
-![Patients](screenshots/patients.png)
+![Dashboard](screenshots/Screenshot_2026-05-31_150552.png)
 
 ---
 
-## 🧠 Modèle IA
+### 🩺 3. Soumettre une analyse
+Renseigner le nom du patient, l'âge, et uploader une image de la lésion cutanée.
 
-| Paramètre | Valeur |
-|-----------|--------|
-| Architecture | VGG16 (Transfer Learning) |
-| Input | Image 224×224 px |
-| Output | Probabilité de malignité (0 → 1) |
-| Seuil | > 0.5 = **Malignant** / ≤ 0.5 = **Benign** |
-| Dataset | Skin Cancer: Malignant vs Benign (Kaggle) |
-
-> ⚠️ Le fichier modèle `vgg16_malignant_vs_benign.h5` (~130MB) n'est pas inclus dans ce repo (limite GitHub 100MB). À placer manuellement dans le dossier `model/`.
+![Predict](screenshots/Screenshot_2026-05-31_150646.png)
 
 ---
 
-## 🛠️ Technologies utilisées
+### ✅ 4. Résultat du diagnostic IA
+Le modèle VGG16 analyse l'image et retourne un diagnostic **Malignant** ou **Benign** avec un taux de confiance et une barre de progression.
 
-| Catégorie | Outil |
-|-----------|-------|
-| Backend | Python 3.x, Flask |
-| IA / ML | TensorFlow, Keras, VGG16 |
-| Base de données | MySQL via XAMPP |
-| Frontend | HTML5, Bootstrap 5, CSS3 |
-| Polices | Syne, DM Sans (Google Fonts) |
+![Result](screenshots/Screenshot_2026-05-31_150848.png)
 
 ---
 
-## 📁 Structure du projet
+### 📋 5. Historique patients
+Consulter tous les diagnostics enregistrés avec les images, résultats et dates.
 
-```
-SKIN_CANCER_APP2/
-├── model/
-│   └── vgg16_malignant_vs_benign.h5   ← (à ajouter manuellement)
-├── static/
-│   ├── uploads/                        ← images soumises par les utilisateurs
-│   └── style.css                       ← design dark theme
-├── templates/
-│   ├── login.html                      ← page de connexion
-│   ├── dashboard.html                  ← tableau de bord
-│   ├── predict.html                    ← formulaire d'analyse
-│   ├── result.html                     ← affichage du résultat
-│   └── patients.html                   ← historique des diagnostics
-├── app.py                              ← logique Flask principale
-├── database.sql                        ← script de création BDD
-└── README.md
-```
+![Patients](screenshots/Screenshot_2026-05-31_151002.png)
 
 ---
 
-## ⚙️ Installation
-
-### 1. Cloner le repo
-```bash
-git clone https://github.com/just-a-useless-web/skin-cancer-detector.git
-cd skin-cancer-detector
-```
-
-### 2. Installer les dépendances Python
-```bash
-pip install flask tensorflow numpy mysql-connector-python
-```
-
-### 3. Configurer la base de données
-- Démarrer **XAMPP** → Apache + MySQL
-- Ouvrir `http://localhost/phpmyadmin`
-- Onglet **SQL** → coller le contenu de `database.sql` → **Exécuter**
-
-### 4. Placer le modèle
-Copier `vgg16_malignant_vs_benign.h5` dans le dossier `model/`
-
-### 5. Lancer l'application
-```bash
-python app.py
-```
-Ouvrir dans le navigateur : `http://localhost:5000`
-
----
-
-## 🔐 Identifiants par défaut
+## 🔐 Identifiants
 
 | Champ | Valeur |
 |-------|--------|
@@ -130,23 +61,21 @@ Ouvrir dans le navigateur : `http://localhost:5000`
 
 ---
 
-## 🚀 Fonctionnalités
+## 🧠 Comment fonctionne l'IA ?
 
-| Route | Description |
+| Étape | Description |
 |-------|-------------|
-| `/` | Page de connexion sécurisée |
-| `/dashboard` | Tableau de bord principal |
-| `/predict` | Formulaire d'analyse IA |
-| `/patients` | Historique des diagnostics (tri par date) |
-| `/logout` | Déconnexion et vidage de session |
+| 1 | L'image est redimensionnée en **224×224 px** |
+| 2 | Normalisée (valeurs entre 0 et 1) |
+| 3 | Analysée par le modèle **VGG16** |
+| 4 | Score > 0.5 → **Malignant** / Score ≤ 0.5 → **Benign** |
+| 5 | Résultat + probabilité sauvegardés en base de données |
+
+> ⚠️ Ce diagnostic est une **aide à la décision**. Il ne remplace pas un dermatologue.
 
 ---
 
 ## 👩‍💻 Auteure
 
-**Lina Zammel** — 1ère année ingénieur, Technologies Avancées (1TA)  
-ENSTAB — École Nationale des Sciences et Technologies Avancées de Borj Cédria  
-Université de Carthage — 2025/2026  
-
-Enseignante : **Amira Echtioui**
-
+**Lina Zammel** — 1ère année ingénieur Technologies Avancées (1TA)  
+ENSTAB — Université de Carthage — 2025/2026
